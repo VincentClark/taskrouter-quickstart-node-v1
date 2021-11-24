@@ -26,7 +26,7 @@ const workspace_sid = process.env.TWILIO_WORKSPACE_SID;
 const workflow_sid = process.env.TWILIO_WORKFLOW_SID;
 const worker_neva_sid = process.env.TWILIO_WORKER_NEVA_SID;
 const worker_zoe_sid = process.env.TWILIO_WORKER_ZOE_SID;
-const post_worker_activity_sid = process.env.TWILIO_ACTIVITY_OFFLINE;
+const post_worker_activity_sid = process.env.TWILIO_POST_WORKER_ACTIVITY;
 //twilio setup
 const client = twilio(account_sid, auth_token);
 const task_sid = '';
@@ -161,15 +161,26 @@ app.get('/agents', (req, res) => {
     // Worker Policies
     let workerPolicies = util.defaultWorkerPolicies(version, workspace_sid, worker_sid);
 
-    let workspacePolicies = [
-        // Workspace fetch Policy
+    // let workspacePolicies = [
+    //     // Workspace fetch Policy
+    //     buildWorkspacePolicy(),
+    //     // Workspace subresources fetch Policy
+    //     buildWorkspacePolicy({ resources: ['**'], method: 'POST' }),
+    //     // Workspace Activities Update Policy
+    //     buildWorkspacePolicy({ resources: ['Activities'], method: 'POST' }),
+    //     // Workspace Activities Worker Reserations Policy
+    //     buildWorkspacePolicy({ resources: ['Workers', worker_sid, 'Reservations', '**'], method: 'POST' }),
+    // ];
+
+    const workspacePolicies = [
+        // Workspace Policy
         buildWorkspacePolicy(),
         // Workspace subresources fetch Policy
+        buildWorkspacePolicy({ resources: ['**'] }),
+        // Workspace resources update Policy
         buildWorkspacePolicy({ resources: ['**'], method: 'POST' }),
-        // Workspace Activities Update Policy
-        //buildWorkspacePolicy({ resources: ['Activities'], method: 'POST' }),
-        // Workspace Activities Worker Reserations Policy
-        //buildWorkspacePolicy({ resources: ['Workers', worker_sid, 'Reservations', '**'], method: 'POST' }),
+        // Workspace resources delete Policy
+        buildWorkspacePolicy({ resources: ['**'], method: 'DELETE' }),
     ];
     eventBridgePolicies.concat(workerPolicies).concat(workspacePolicies).forEach(function (policy) {
         capability.addPolicy(policy);
