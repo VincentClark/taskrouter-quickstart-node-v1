@@ -142,11 +142,13 @@ function buildWorkspacePolicy(options) {
     options = options || {};
     let resources = options.resources || [];
     var urlComponents = [TASKROUTER_BASE_URL, version, 'Workspaces', workspace_sid]
-    return new Policy({
+    const policy = new Policy({
         url: urlComponents.concat(resources).join('/'),
         method: options.method || 'GET',
         allow: true
     });
+    console.log(policy)
+    return policy;
 }
 
 app.get('/agents', (req, res) => {
@@ -157,32 +159,16 @@ app.get('/agents', (req, res) => {
         workspaceSid: workspace_sid,
         channelId: worker_sid
     });
-    let eventBridgePolicies = util.defaultEventBridgePolicies(account_sid, worker_sid);
+    const eventBridgePolicies = util.defaultEventBridgePolicies(account_sid, worker_sid);
     // Worker Policies
-    let workerPolicies = util.defaultWorkerPolicies(version, workspace_sid, worker_sid);
-
-    // let workspacePolicies = [
-    //     // Workspace fetch Policy
-    //     buildWorkspacePolicy(),
-    //     // Workspace subresources fetch Policy
-    //     buildWorkspacePolicy({ resources: ['**'], method: 'POST' }),
-    //     // Workspace Activities Update Policy
-    //     buildWorkspacePolicy({ resources: ['Activities'], method: 'POST' }),
-    //     // Workspace Activities Worker Reserations Policy
-    //     buildWorkspacePolicy({ resources: ['Workers', worker_sid, 'Reservations', '**'], method: 'POST' }),
-    // ];
+    const workerPolicies = util.defaultWorkerPolicies(version, workspace_sid, worker_sid);
 
     const workspacePolicies = [
-        // Workspace Policy
-        buildWorkspacePolicy(),
-        // Workspace subresources fetch Policy
-        buildWorkspacePolicy({ resources: ['**'] }),
-        // Workspace resources update Policy
-        buildWorkspacePolicy({ resources: ['**'], method: 'POST' }),
-        // Workspace resources delete Policy
-        buildWorkspacePolicy({ resources: ['**'], method: 'DELETE' }),
+        // Workspace subresources fetch Policy for the specified worker in the workspace
+        // Use wild card '**' to match all subresources of the workers in workspace
+        buildWorkspacePolicy({ resources: ['Workers', worker_sid], method: 'POST' }),
     ];
-    eventBridgePolicies.concat(workerPolicies).concat(workspacePolicies).forEach(function (policy) {
+    eventBridgePolicies.concat(workerPolicies).concat(workspacePolicies).forEach(policy => {
         capability.addPolicy(policy);
     });
     let worker_token = capability.toJwt();
