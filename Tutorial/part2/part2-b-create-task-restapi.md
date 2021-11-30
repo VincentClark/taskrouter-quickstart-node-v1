@@ -4,7 +4,7 @@ Recall the TaskRouter Task lifecycle:
 
 _Task Created → eligible Worker becomes available → Worker reserved → Reservation accepted → Task assigned to Worker._
 
-> If you'd like to to view the events happening in your Workspace at an Event Callback URL, please obtain a free endpoint URL then set the Event Callback URL in your Workspace to point there.
+> If you'd like to to view the events happening in your Workspace at an Event Callback URL, please obtain a [free endpoint URL](https://requestbin.com/) then set the Event Callback URL in your Workspace to point there.
 
 _NOTE NEED IMAGE_
 
@@ -71,3 +71,22 @@ app.listen(port, () =>
   console.log(`Taskrouter app listening on port ${port}!`)
 );
 ```
+
+Next, reset your Workflow's Assignment Callback URL as shown below to point to your new, running Node/Express server's path.
+
+_NEED IMAGE_
+
+To generate a Task, visit the /create_task route we have just defined.
+
+Alternatively, we can also create a Task using the command line utility curl, which should exist on any Mac or Linux workstation. Execute the following command at your terminal, making sure to replace the {} with your ngrok forwarding URL:
+
+```bash
+curl -X POST https://taskrouter.twilio.com/v1/Workspaces/{WorkspaceSid}/Tasks
+--data-urlencode Attributes='{"selected_language": "es"}'
+-d WorkflowSid={WorkflowSid}
+-u {AccountSid}:{AuthToken}
+```
+
+If you don't have curl, you can run this request using an HTTP test tool or using the Task creation dialog in the TaskRouter web portal: with your Workspace open, click 'Tasks' then 'Create Task'.
+
+To see our newly created Task in the TaskRouter web portal, with your Workspace open, click 'Tasks' in the main navigation. Notice that the Task has been added to the "Customer Care Requests - Spanish" Task Queue based on the Attributes we provided in the curl request. The Assignment Status is 'pending' because there is no available Worker that matches the Task Queue:

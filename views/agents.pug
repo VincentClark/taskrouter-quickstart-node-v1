@@ -55,6 +55,7 @@ html
                     var activities = activityList.data;
                     var i = activities.length;
                     while (i--) {
+                        console.log(activities[i].friendlyName);
                         activitySids[activities[i].friendlyName] = activities[i].sid;
                     }
                 });
@@ -116,24 +117,28 @@ html
                 p(class="activity")
                     span Offline
                 button(class="change-activity" data-next-activity="Idle")
-                    Go Available
+                    Go Idle
             section(class="agent-activity idle")
                 p(class="activity")
-                    span Available
+                    span Idle
                 button(class="change-activity" data-next-activity="Offline")
                     Go Offline
+                button(class="change-activity" data-next-activity="Reserved")
+                    Go Reserved
             section(class="agent-activity reserved")
                 p(class="activity")
-                    Reserved
+                    span Reserved
+                button(class="change-activity" data-next-activity="Busy")
+                    Go Busy            
             section(class="agent-activity busy")
                 p(class="activity")
-                    Busy
+                    span Busy
+                button(class="change-activity" data-next-activity="WrapUp")
+                    Go WrapUp
             section(class="agent-activity wrapup")
                 p(class="activity")
-                    Wrap-Up
-                    button(class="change-activity" data-next-activity="Idle")
-                        Go Available
-                    button(class="change-activity" data-next-activity="Offline")
-                        Go Offline
+                    span WrapUp
+                button(class="change-activity" data-next-activity="Idle")
+                        Go Idle
             section(class="log")
                 textarea(id="log" readonly="true")

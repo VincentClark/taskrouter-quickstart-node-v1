@@ -141,13 +141,14 @@ app.post('/enqueue_call', (req, res) => {
 function buildWorkspacePolicy(options) {
     options = options || {};
     let resources = options.resources || [];
+    let postFilter = options.postFilter || {};
     var urlComponents = [TASKROUTER_BASE_URL, version, 'Workspaces', workspace_sid]
     const policy = new Policy({
         url: urlComponents.concat(resources).join('/'),
         method: options.method || 'GET',
+        postFilter: postFilter,
         allow: true
     });
-    console.log(policy)
     return policy;
 }
 
@@ -166,11 +167,30 @@ app.get('/agents', (req, res) => {
     const workspacePolicies = [
         // Workspace subresources fetch Policy for the specified worker in the workspace
         // Use wild card '**' to match all subresources of the workers in workspace
-        buildWorkspacePolicy({ resources: ['Workers', worker_sid], method: 'POST' }),
+
+        buildWorkspacePolicy({
+            resources: ['Workers', worker_sid],
+            method: 'POST',
+            allow: true,
+            postFilter: { "ActivitySid": { 'required': true } }
+        }),
+        buildWorkspacePolicy({
+            resources: ['Tasks', '**'],
+            method: 'POST',
+            allow: true,
+        }),
+        buildWorkspacePolicy({
+            resources: ['Reservations', "**"],
+            method: 'POST',
+            allow: true,
+        }),
     ];
+
+
     eventBridgePolicies.concat(workerPolicies).concat(workspacePolicies).forEach(policy => {
         capability.addPolicy(policy);
     });
+    console.log(capability)
     let worker_token = capability.toJwt();
     res.status(200).
         render('agents.pug', {
