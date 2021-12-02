@@ -24,7 +24,7 @@ const account_sid = process.env.TWILIO_ACCOUNT_SID;
 const auth_token = process.env.TWILIO_AUTH_TOKEN;
 const workspace_sid = process.env.TWILIO_WORKSPACE_SID;
 const workflow_sid = process.env.TWILIO_WORKFLOW_SID;
-const worker_neva_sid = process.env.TWILIO_WORKER_NEVA_SID;
+const worker_neva_sid = process.env.TWILIO_WORKER_ALICE_SID;
 const worker_zoe_sid = process.env.TWILIO_WORKER_ZOE_SID;
 const post_worker_activity_sid = process.env.TWILIO_POST_WORKER_ACTIVITY;
 //twilio setup
@@ -34,7 +34,8 @@ const task_sid = '';
 app.get('/assignment_callback', (req, res) => {
     //used for accessing via browser, only to test the callback
     console.log('assignmeegnt get callback');
-    res.status(200).json({ "message": "success" });
+    console.log("tasksid", req.body)
+    res.status(200).json({ "instruction": "accept", "activity_sid": post_worker_activity_sid, "channelId": worker_neva_sid });
 });
 
 /*
@@ -46,16 +47,17 @@ app.get('/assignment_callback', (req, res) => {
 */
 app.post('/assignment_callback', (req, res) => {
     //accsessed via twilio
-    console.log('assignment_callback');
+    //console.log(req.body);
+    // console.log('assignmeegnt post callback');
+    // res.status(200).json({ "instruction": "accept", "activity_sid": post_worker_activity_sid, "channelId": worker_neva_sid });
     const ret =
     {
         "to": "+16268985404", // the number to your worker
         "instruction": "dequeue",
         "from": "+16267654137", // the number to your client
-        "post_work_activity_sid": post_worker_activity_sid
+        "activity_sid": post_worker_activity_sid
     }
-    console.log(ret);
-    res.status(200).json(ret);
+    res.status(200).json({ ret });
 });
 
 app.get('/create_task', (req, res) => {
@@ -74,15 +76,26 @@ app.get('/create_task', (req, res) => {
 
 app.get('/accept_reservation', (req, res) => {
     //accept reservation
-    //ensure your url matches http://localhost:3000/accept_reservation?task_sid=<task_sid>
+    //ensure your url matches http://localhost:3000/accept_reservation?task_sid={task_sid}&reservation_sid={reservation_sid}
     let task_sid = req.query.task_sid;
-    reservation_sid = req.query.reservation_sid;
-    client.taskrouter.workspaces(workspace_sid).tasks(task_sid).update({
-        reservationStatus: 'accepted'
-    }).then(task => {
-        res.status(200).json({ "message": "accepted" });
+    let reservation_sid = req.query.reservation_sid;
+    console.log("task", task_sid);
+    console.log("reservation", reservation_sid);
+    try {
+
+        let reservation = client.taskrouter.workspaces(workspace_sid)
+            .tasks(task_sid)
+            .reservations(reservation_sid)
+            .update({ reservationStatus: 'accepted' })
+            .then(reservation => {
+                console.log("reservation!", reservation);
+                res.status(200).json({ "reservation_status_server": reservation.reservationStatus, "reservation_worker": reservation.workerName });
+            }
+            );
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ "message": "error", "error": err })
     }
-    );
 });
 
 //incomming call

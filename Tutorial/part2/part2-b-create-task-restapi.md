@@ -6,15 +6,17 @@ _Task Created → eligible Worker becomes available → Worker reserved → Rese
 
 > If you'd like to to view the events happening in your Workspace at an Event Callback URL, please obtain a [free endpoint URL](https://requestbin.com/) then set the Event Callback URL in your Workspace to point there.
 
-_NOTE NEED IMAGE_
+![workflow callback](images/workflow_callback.png)
 
 Before we create our first Task, make sure that our Worker Alice is in a non-available Activity state. Bob's Activity state won't matter right now, as we will create a Spanish language Task that he is not eligible to handle.
 
 With your Workspace open in the [TaskRouter web portal](https://www.twilio.com/user/account/taskrouter/workspaces), click 'Workers' then click to edit Alice and set her Activity to 'Offline'. Your Workers should look like this:
 
-_NOTE NEED IMAGE_
+![workers_setup_01](images/workers_setup_01.png)
 
 To simulate reality, we'll create a Task using the REST API rather than the web portal. We'll add on to our run.py to create a task with our web server. Replace the {} with your Twilio AccountSid, Twilio AuthToken, WorkspaceSid, and WorkflowSid.
+
+\*note if you did not already install the Twilio NPM, do it now before executing this code.
 
 ```javascript
 //imports
@@ -74,7 +76,7 @@ app.listen(port, () =>
 
 Next, reset your Workflow's Assignment Callback URL as shown below to point to your new, running Node/Express server's path.
 
-_NEED IMAGE_
+![assignment_callback](images/assignment_callback2.png)
 
 To generate a Task, visit the /create_task route we have just defined.
 
@@ -89,4 +91,30 @@ curl -X POST https://taskrouter.twilio.com/v1/Workspaces/{WorkspaceSid}/Tasks
 
 If you don't have curl, you can run this request using an HTTP test tool or using the Task creation dialog in the TaskRouter web portal: with your Workspace open, click 'Tasks' then 'Create Task'.
 
-To see our newly created Task in the TaskRouter web portal, with your Workspace open, click 'Tasks' in the main navigation. Notice that the Task has been added to the "Customer Care Requests - Spanish" Task Queue based on the Attributes we provided in the curl request. The Assignment Status is 'pending' because there is no available Worker that matches the Task Queue:
+To see our newly created Task in the TaskRouter web portal, with your Workspace open, click 'Tasks' in the main navigation. Notice that the Task has been added to the "Customer Care Requests - Spanish" Task Queue based on the Attributes we provided in the curl request. The Assignment Status is 'pending' because there is no available Worker that matches the Task Queue.
+
+![task_demo](task_demo.png)
+
+#Make an Eligible Worker Available
+
+Look again at the TaskRouter Task lifecycle:
+
+_Task Created → eligible Worker becomes available → Worker reserved → Reservation accepted → Task assigned to Worker._
+
+The first stage – 'Task Created' – is complete. To trigger an automatic Task Reservation, the next step is to bring an eligible Worker online.
+
+Therefore, with your Workspace open in the TaskRouter web portal, click 'Workers', then click to edit Alice and set her Activity to 'Idle':
+
+![alice_set_idle](images/alice_set_to_idle.png)
+
+When you hit save, Twilio will create a Reservation between Alice and our Task and you will receive a Webhook request at the Assignment Callback URL that we set up in the previous step. If you're using ngrok, open http://localhost:4040 in your web browser to see a detailed log of the request that Twilio made to your server, including all the parameters that your server might use to determine whether to accept a Reservation:
+
+![localhost_4040](images/localhost_4040.png)
+
+We're now one step further along the Task Reservation lifecycle:
+
+_Task Created → eligible Worker becomes available → **Worker reserved** → Reservation accepted → Task assigned to Worker._
+
+Time to accept the Reservation.
+
+[Next: Accept a Reservation with the REST API »](part2-c-accept_reservation.md)

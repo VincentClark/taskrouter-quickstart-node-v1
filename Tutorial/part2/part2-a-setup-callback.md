@@ -26,33 +26,34 @@ version: {enter}
 
 This will create your package.json file.
 
-'''
+```json
 {
-"name": "taskrouter-quickstart",
-"version": "1.0.0",
-"main": "server.js",
-"directories": {
-"test": "test"
-},
-"scripts": {
-"test": "echo \"Error: no test specified\" && exit 1"
-},
-"author": "",
-"license": "ISC",
-"description": ""
+  "name": "taskrouter-quickstart",
+  "version": "1.0.0",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
-'''
+```
 
 > Not sure if I need this section or go into setting start script.
 
 Next we will need to install the express and twilio
-'''
+
+```
 npm install --save express twilio dotenv
-'''
+```
 
 ### create .env file
 
-'''
+```
 TWILIO_ACCOUNT_SID = "AC2##################..."
 TWILIO_AUTH_TOKEN = "########..."
 TWILIO_WORKSPACE_SID = "WS#####..."
@@ -60,7 +61,8 @@ TWILIO_WORKFLOW_SID = "WW#######..."
 TWILIO_WORKER_ALICE_SID = "WK####..."
 TWILIO_WORKER_BOB_SID = "WK####..."
 TWILIO_POST_WORKER_ACTIVITY = "WA############..."
-'''
+```
+
 It is best practice to keep your sid information into a .env file seprate from your server file. If you choose to add your project to git, ensure that you exclude your .env file in .gitignore
 
 Do not worry about the TWILIO_POSTER_WORKER_ACTIVITY blank for now and we will address it later in the tutorial.
@@ -101,9 +103,9 @@ This returns a JSON document to TaskRouter with a 200 (OK) response code with th
 
 Now lets start our server
 
-'''
+```
 node server.js
-'''
+```
 
 Open up Postman (or equivelent utility) to test our route.
 _because this is a post, you cannot directly hit it through your browser_
@@ -120,11 +122,13 @@ ngrok http 3000
 
 Your local Node/Express server is now accessible to anyone (including TWilio servers) at your ngrok URL.
 
-**PLACE IMAGE**
+![ngrok](images/ngrok.png)
 
 If you prefer not to expose your development machine to the Internet, deploy the Node/Express application to an Internet-accessible Web server.
 
 With those things working, edit your "Incoming Customer Care Requests" Workflow to point at the newly implemented Assignment Callback URL
+
+> **Note Your Ngrok server will change urls everytime it is restarted. When that happens you will need to change the value inside your console.**
 
 Excellent. We're ready to create Tasks and accept Reservations.
 
