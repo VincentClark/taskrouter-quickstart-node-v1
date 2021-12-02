@@ -3,9 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const { urlencoded } = require('body-parser');
 const twilio = require('twilio');
-const taskrouter = require('twilio').jwt.taskrouter;
 const pug = require('pug');
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
+
+const taskrouter = require('twilio').jwt.taskrouter;
 const TASKROUTER_BASE_URL = 'https://taskrouter.twilio.com';
 const TaskRouterCapability = taskrouter.TaskRouterCapability;
 const Policy = TaskRouterCapability.Policy;

@@ -10,6 +10,6 @@ Every element of a TaskRouter Workspace (including the Workspace itself) can be 
 
 That was easy! For the rest of Part 1, we'll be adding necessary elements to our new Workspace so we can start routing Tasks in Part 2.
 
-- [Next: Add and configure workers»](workspace.md)
+- [Next: Add and configure workers»](part1-b-configure-workers.md)
 - [Part 1](part1.md)
 - [Overview](../overview.md)

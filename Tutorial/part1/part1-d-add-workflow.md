@@ -18,7 +18,7 @@ The first Routing Configuration targets Tasks where the caller selected Spanish.
 
 Routing Configuration Expression: <code style="color:red;background-color:lightgrey">selected_langauge == "es"</code>
 
-![routing configuration english](./images/routing_spanish.png)
+![routing configuration english](images/routing_spanish.png)
 
 ## Routing Configuration #2
 
@@ -26,12 +26,12 @@ Use the 'Add a filter' link to add your second Workflow filter.
 
 Routing Configuration Expression: <code style="color:red;background-color:lightgrey">selected_language == "en"</code>
 
-![routing configuration spanish](./images/routing_english.png)
+![routing configuration spanish](images/routing_english.png)
 
 Set the default Task Queue to 'None' before saving the Workflow:
 
-![default queue](./images/routing_default.png)
+![default queue](images/routing_default.png)
 
 We're just about done setting up! But before we start adding Tasks to our Workspace, we need to understand the role of Activities.
 
-[Next: Understanding Activities »](./part1-e-understanding_activities.md)
+[Next: Understanding Activities »](part1-e-understanding-activities.md)

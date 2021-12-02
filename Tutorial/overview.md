@@ -27,11 +27,13 @@ TaskRouter bears the burden of this complexity, allowing you to spend less time 
 
 > - Nodejs version (10.0 > 12.0) _will update_
 > - If you are running your Node server locally (as we will in the examples), you will need a took such as [ngrok](http://www.ngrok.com/) to allow Twilio's servers to interact with your code.
+> - You will need Postman or similar too to simulate post commands.
 
 ### Conventions
 
 > - Code and commands are written in fixed width
 > - When following a code sample, check for {curly braces} - this means you need to substitute a value from your own TaskRouter account
 > - Supplemental information is provided in blockquotes:
+>   .
 
 [Part 1: Setting up a TaskRouter Workspace](part1/part1.md)

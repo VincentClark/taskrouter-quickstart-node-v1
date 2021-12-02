@@ -20,6 +20,6 @@ Rinse and repeat. Create another Worker named Bob who is exclusively capable of 
 
 Bob's Worker Attributes Expression: <code style="color:red;background-color:lightgrey">{"languages": ["en"]}</code>
 
-![create-worker-bob](./images/create_worker_bob.png)
+![create-worker-bob](images/create_worker_bob.png)
 
-[Next: Add Task Queues >>](./part1-c-add-task_queues.md)
+[Next: Add Task Queues >>](part1-c-create-task_queues.md)
