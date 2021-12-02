@@ -272,7 +272,7 @@ app.post("/enqueue_call", (req, res) => {
 });
 
 app.get("/agents", (req, res) => {
-  const worker_sid = worker_neva_sid;
+  const worker_sid = req.query.worker_sid;
   const capability = new TaskRouterCapability({
     accountSid: account_sid,
     authToken: auth_token,
@@ -289,6 +289,24 @@ app.get("/agents", (req, res) => {
     workspace_sid,
     worker_sid
   );
+  function buildWorkspacePolicy(options) {
+    options = options || {};
+    let resources = options.resources || [];
+    let postFilter = options.postFilter || {};
+    var urlComponents = [
+      TASKROUTER_BASE_URL,
+      version,
+      "Workspaces",
+      workspace_sid,
+    ];
+    const policy = new Policy({
+      url: urlComponents.concat(resources).join("/"),
+      method: options.method || "GET",
+      postFilter: postFilter,
+      allow: true,
+    });
+    return policy;
+  }
 
   const workspacePolicies = [
     // Workspace subresources fetch Policy for the specified worker in the workspace
