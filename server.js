@@ -47,18 +47,17 @@ app.get('/assignment_callback', (req, res) => {
     Remember that #1 and #2 numbers must be in your Twilio account as verified numbers.
 */
 app.post('/assignment_callback', (req, res) => {
-    //accsessed via twilio
-    //console.log(req.body);
-    // console.log('assignmeegnt post callback');
-    // res.status(200).json({ "instruction": "accept", "activity_sid": post_worker_activity_sid, "channelId": worker_neva_sid });
-    const ret =
-    {
-        "to": "+16268985404", // the number to your worker
-        "instruction": "dequeue",
-        "from": "+16267654137", // the number to your client
-        "activity_sid": post_worker_activity_sid
+    console.log("assignment_callback");
+    try {
+        res.status(200).json({
+            instruction: "dequeue",
+            from: "+16267901016"
+        });
     }
-    res.status(200).json({ ret });
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "error" });
+    }
 });
 
 app.get('/create_task', (req, res) => {

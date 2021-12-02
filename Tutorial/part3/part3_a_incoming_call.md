@@ -122,7 +122,7 @@ app.listen(port, () =>
 
 You can use the [Buy Numbers](https://www.twilio.com/console/phone-numbers/search) section of the Twilio Voice and Messaging web portal to purchase a new phone number, or use an existing Twilio phone number. Open the phone number details page and point the Voice Request URL at your new endpoint:
 
-**IMAGE OF PHONECALL**
+![voice_properties](images/voice_properties.png)
 
 Using any phone, call the Twilio number. You will be prompted to press one for Spanish or two for English. However, when you press a digit, you'll hear an error message. That's because our <code style="color:red;background-color:ivory"><_Gather_></code> verb is pointing to another endpoint, <code style="color:red;background-color:ivory">enqueue_call</code>, which we haven't implemented yet. In the next step we'll add the required endpoint and use it to create a new Task based on the language selected by the caller.
 

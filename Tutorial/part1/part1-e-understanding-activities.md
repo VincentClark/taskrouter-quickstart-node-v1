@@ -4,7 +4,8 @@ Activities represent the discrete states that a Worker can be in at any given ti
 
 With your Workspace open in the [TaskRouter](https://www.twilio.com/console/taskrouter/workspaces) console, click 'Activities' to see the default Activities that were provided when you created this Workspace:
 
-**Will add image when I understand Activities better**
+Set Your properties as such:
+[!activites](images/activities.png)
 
 [Finally: Wrapping Up »](part1-g-wrapping-up.md)
 

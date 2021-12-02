@@ -120,24 +120,6 @@ app.set("views", "./views");
 Finally in our response we will build our JWT and then render the JWT in our template page.
 
 ```javascript
-eventBridgePolicies
-  .concat(workerPolicies)
-  .concat(workspacePolicies)
-  .forEach((policy) => {
-    capability.addPolicy(policy);
-  });
-console.log(capability);
-let worker_token = capability.toJwt();
-res.status(200).render("agents.pug", {
-  worker_token: worker_token,
-});
-```
-
-Our final code will be:
-
-## server.js
-
-```javascript
 //imports
 require("dotenv").config();
 const express = require("express");
@@ -249,12 +231,6 @@ app.post("/incoming_call", (req, res) => {
       "Welcome to the Call"
     );
     //
-    const g = twiml.gather({
-      method: "POST",
-      numDigits: 1,
-      action: "/enqueue_call",
-      timeout: 50,
-    });
     g.say(
       {
         voice: "alice",
@@ -516,7 +492,7 @@ You will notice that we included two enternal files:
 
 > -agent.css is a simple CSS file created for the purpose of this Quickstart. It saves us having to type out some simple pre-defined styles.
 
-And that's it! Open <code style="color:red; background-color:ivory">localhost:8080/agents?WorkerSid={WK012340123401234}</coode> in your browser and you should see the screen below. If you make the same phone call as we made in Part 3, ~~~you should see Alice's Activity transition on screen as she is reserved and assigned to handle the Task.~~~
+And that's it! Open <code style="color:red; background-color:ivory">localhost:8080/agents?WorkerSid={WK012340123401234}</code> in your browser and you should see the screen below. If you make the same phone call as we made in Part 3, ~~~you should see Alice's Activity transition on screen as she is reserved and assigned to handle the Task.~~~
 
 If you see "Initializing..." and no progress, make sure that you have included the correct WorkerSid in the "WorkerSid" request parameter of the URL.
 

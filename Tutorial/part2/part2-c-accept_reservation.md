@@ -110,6 +110,6 @@ _If you don't see this, it's possible that your Reservation has timed out. If th
 
 ~~With your Workspace open in the TaskRouter web portal, click 'Workers' and you'll see that Alice has been transitioned to the 'Assignment Activity' of the TaskQueue that assigned the Task. In this case, "Busy":~~
 
-[Next: Accept a Reservation using Assignment Instructions »](part-2-d-accept_assignment_instructions.md)
+[Next: Accept a Reservation using Assignment Instructions »](part2-d-accept_assignment_instructions.md)
 
 _/_/ If you're not using ngrok or a similar tool, you can modify server.js to console.log the value of ReservationSid. Or, you can use the Tasks REST API instance resource to look up the ReservationSid based on the TaskSid.

@@ -7,4 +7,4 @@ In Part 1 of the Quickstart we create a TaskRouter Workspace - the container ele
 > 3.  [Add and Configure Task Queues](part1-c-create-task_queues.md)
 > 4.  [Add and Configure a Workflow](part1-d-add-workflow.md)
 > 5.  [Unserstanding Activities](part1-e-understanding-activities.md)
-> 6.  Wrapping Up
+> 6.  [Wrapping Up](part1-g-wrapping-up.md)
