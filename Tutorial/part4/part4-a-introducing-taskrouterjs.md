@@ -9,3 +9,11 @@ For details, refer to the [complete documentation](https://www.twilio.com/docs/t
 In the next step, we'll add a realtime "Agent" user interface - a highly simplified Web page that allows our Worker Alice to control her current Activity State, see when her Activity state has changed, and see information about new incoming calls.
 
 [Next: Add an Agent UI to our Project »](part4-add-agent-ui.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 4](part4.md)
+- [Overview](../overview.md)
+
+</details>

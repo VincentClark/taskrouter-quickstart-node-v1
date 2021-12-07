@@ -521,3 +521,11 @@ Completed Agent UI
 > -This simple PoC has been tested in the latest version of popular browsers, including IE 11. \*
 
 **Need Image**
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

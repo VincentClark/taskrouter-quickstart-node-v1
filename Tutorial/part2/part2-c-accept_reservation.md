@@ -113,3 +113,11 @@ _If you don't see this, it's possible that your Reservation has timed out. If th
 [Next: Accept a Reservation using Assignment Instructions »](part2-d-accept_assignment_instructions.md)
 
 _/_/ If you're not using ngrok or a similar tool, you can modify server.js to console.log the value of ReservationSid. Or, you can use the Tasks REST API instance resource to look up the ReservationSid based on the TaskSid.
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

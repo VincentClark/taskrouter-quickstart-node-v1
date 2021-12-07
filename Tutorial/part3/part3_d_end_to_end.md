@@ -28,3 +28,11 @@ When either party hangs up the call, you should see Alice transition to the Wrap
 In Part 4 we'll build a user interface for our Workers, enabling them to view and control their own availability. To do this, we'll use TaskRouter.js - a WebSocket powered JavaScript library.
 
 [Part 4: Real-time Agent User Interface »](../part4/part4.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

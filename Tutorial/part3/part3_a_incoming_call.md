@@ -127,3 +127,11 @@ You can use the [Buy Numbers](https://www.twilio.com/console/phone-numbers/searc
 Using any phone, call the Twilio number. You will be prompted to press one for Spanish or two for English. However, when you press a digit, you'll hear an error message. That's because our <code style="color:red;background-color:ivory"><_Gather_></code> verb is pointing to another endpoint, <code style="color:red;background-color:ivory">enqueue_call</code>, which we haven't implemented yet. In the next step we'll add the required endpoint and use it to create a new Task based on the language selected by the caller.
 
 [Next: Create a Task using Enqueue »](part3_b_enqueue.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part3.md)
+- [Overview](../overview.md)
+
+</details>

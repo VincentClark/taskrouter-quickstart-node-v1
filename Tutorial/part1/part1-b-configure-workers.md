@@ -23,3 +23,11 @@ Bob's Worker Attributes Expression: <code style="color:red;background-color:ligh
 ![create-worker-bob](images/create_worker_bob.png)
 
 [Next: Add Task Queues >>](part1-c-create-task_queues.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 1](part1.md)
+- [Overview](../overview.md)
+
+</details>

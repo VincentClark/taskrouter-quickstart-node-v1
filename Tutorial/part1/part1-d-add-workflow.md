@@ -35,3 +35,11 @@ Set the default Task Queue to 'None' before saving the Workflow:
 We're just about done setting up! But before we start adding Tasks to our Workspace, we need to understand the role of Activities.
 
 [Next: Understanding Activities »](part1-e-understanding-activities.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 1](part1.md)
+- [Overview](../overview.md)
+
+</details>

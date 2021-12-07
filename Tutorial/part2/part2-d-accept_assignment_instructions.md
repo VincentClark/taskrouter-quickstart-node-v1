@@ -124,3 +124,11 @@ And that's that. We created another Task using the REST API, accepted it via an 
 Onward! Next, we'll learn about shortcuts to create Tasks originating from Twilio phone calls.
 
 [Part 3: Create Tasks from Phone Calls using TwiML »](../part3/part3.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

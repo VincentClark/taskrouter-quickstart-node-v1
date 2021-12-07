@@ -9,5 +9,10 @@ Set Your properties as such:
 
 [Finally: Wrapping Up »](part1-g-wrapping-up.md)
 
-- [Part1](part1.md)
-- [Overview] (../overview.md)
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 1](part1.md)
+- [Overview](../overview.md)
+
+</details>

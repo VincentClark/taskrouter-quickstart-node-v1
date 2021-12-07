@@ -7,3 +7,11 @@ Our sample business domain is extremely simple, leveraging just one dimension (l
 In Part 2, we create Tasks using the TaskRouter REST API and observe the Task assignment lifecycle.
 
 [Part 2: Creating Tasks and Accepting Reservations»](../part2/part2.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 1](part1.md)
+- [Overview](../overview.md)
+
+</details>

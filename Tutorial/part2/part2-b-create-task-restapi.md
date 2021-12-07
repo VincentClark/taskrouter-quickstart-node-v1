@@ -118,3 +118,11 @@ _Task Created → eligible Worker becomes available → **Worker reserved** → 
 Time to accept the Reservation.
 
 [Next: Accept a Reservation with the REST API »](part2-c-accept_reservation.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

@@ -183,3 +183,11 @@ g.say(
 ```
 
 [Next: Dequeue a Call to a Worker »](part3_c_dequeue_call.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

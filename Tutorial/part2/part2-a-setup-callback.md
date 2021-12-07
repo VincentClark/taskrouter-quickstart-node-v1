@@ -14,9 +14,9 @@ First set up the local Node/Express server:
 
 Create your directory and initialize node.js
 
-'''
-npm init node
-'''
+```
+npm init
+```
 
 There will be a series of questions.
 package name:(name): taskrouter-quickstart
@@ -134,5 +134,10 @@ Excellent. We're ready to create Tasks and accept Reservations.
 
 [Next: Create a Task using the REST API »](part2-a-create-task-restapi.md)
 
-1. [Part 2 Overview](part2.md)
-1. [Overview](../overview.md)
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

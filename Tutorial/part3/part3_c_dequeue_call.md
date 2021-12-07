@@ -197,3 +197,11 @@ The JSON instructs Twilio to dequeue the waiting call and, because we don't incl
 In the next step, we test our incoming call flow from end-to-end.
 
 [Next: End-to-End Phone Call Task Assignment »](part3_d_end_to_end.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 2](part2.md)
+- [Overview](../overview.md)
+
+</details>

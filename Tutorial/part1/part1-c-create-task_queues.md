@@ -35,3 +35,11 @@ Reopen the Spanish TaskQueue for comparison - only Alice will show in the list o
 Wonderful. We have created two TaskQueues to target our Workers. But before a TaskQueue assigns a Task to a Worker, the Task needs to be created and added to the TaskQueue. That's the role of a Workflow.
 
 [Next: Add a workflow](part1-d-add-workflow.md)
+
+<details>
+<summary>Click to expand navigation</summary>
+
+- [Part 1](part1.md)
+- [Overview](../overview.md)
+
+</details>
