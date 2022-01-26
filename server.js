@@ -167,14 +167,16 @@ function buildWorkspacePolicy(options) {
     return policy;
 }
 
-app.get('/agents', (req, res) => {
+app.get('/agentsa', (req, res) => {
     const worker_sid = worker_neva_sid;
+    console.log("worker_sid", worker_sid);
     const capability = new TaskRouterCapability({
         accountSid: account_sid,
         authToken: auth_token,
         workspaceSid: workspace_sid,
         channelId: worker_sid
     });
+
     const eventBridgePolicies = util.defaultEventBridgePolicies(account_sid, worker_sid);
     // Worker Policies
     const workerPolicies = util.defaultWorkerPolicies(version, workspace_sid, worker_sid);
@@ -213,4 +215,176 @@ app.get('/agents', (req, res) => {
         });
 });
 //sync
+app.get("/agents", (req, res) => {
+    const worker_sid = req.query.worker_sid;
+    const capability = new TaskRouterCapability({
+        accountSid: account_sid,
+        authToken: auth_token,
+        workspaceSid: workspace_sid,
+        channelId: worker_sid,
+    });
+    const eventBridgePolicies = util.defaultEventBridgePolicies(
+        account_sid,
+        worker_sid
+    );
+    // Worker Policies
+    const workerPolicies = util.defaultWorkerPolicies(
+        version,
+        workspace_sid,
+        worker_sid
+    );
+
+    // function buildWorkspacePolicy(options) {
+    //     options = options || {};
+    //     let resources = options.resources || [];
+    //     let postFilter = options.postFilter || {};
+    //     var urlComponents = [
+    //         TASKROUTER_BASE_URL,
+    //         version,
+    //         "Workspaces",
+    //         workspace_sid,
+    //     ];
+    //     const policy = new Policy({
+    //         url: urlComponents.concat(resources).join("/"),
+    //         method: options.method || "GET",
+    //         postFilter: postFilter,
+    //         allow: true,
+    //     });
+    //     return policy;
+    // }
+    const workspacePolicies = [
+        // Workspace subresources fetch Policy for the specified worker in the workspace
+        // Use wild card '**' to match all subresources of the workers in workspace
+
+        buildWorkspacePolicy({
+            resources: ['Workers', worker_sid],
+            method: 'POST',
+            allow: true,
+            postFilter: { "ActivitySid": { 'required': true } }
+        }),
+        buildWorkspacePolicy({
+            resources: ['Tasks', '**'],
+            method: 'POST',
+            allow: true,
+        }),
+        buildWorkspacePolicy({
+            resources: ['Reservations', "**"],
+            method: 'POST',
+            allow: true,
+        }),
+    ];
+    // const workspacePolicies = [
+    //     // Workspace subresources fetch Policy for the specified worker in the workspace
+    //     // Use wild card '**' to match all subresources of the workers in workspace
+
+    //     buildWorkspacePolicy({
+    //         resources: ["Workers", worker_sid],
+    //         method: "POST",
+    //         allow: true,
+    //         postFilter: { ActivitySid: { required: true } },
+    //     }),
+    //     buildWorkspacePolicy({
+    //         resources: ["Tasks", "**"],
+    //         method: "POST",
+    //         allow: true,
+    //     }),
+    //     buildWorkspacePolicy({
+    //         resources: ["Reservations", "**"],
+    //         method: "POST",
+    //         allow: true,
+    //     }),
+    // ];
+
+    // eventBridgePolicies
+    //     .concat(workerPolicies)
+    //     .concat(workspacePolicies)
+    //     .forEach((policy) => {
+    //         capability.addPolicy(policy);
+    //     });
+    // console.log(capability);
+    // let worker_token = capability.toJwt();
+    // res.status(200).render("agents.pug", {
+    //     worker_token: worker_token,
+    // });
+    eventBridgePolicies.concat(workerPolicies).concat(workspacePolicies).forEach(policy => {
+        capability.addPolicy(policy);
+    });
+    console.log(capability)
+    let worker_token = capability.toJwt();
+    res.status(200).
+        render('agents.pug', {
+            worker_token: worker_token
+        });
+});
+app.get("/agentsr", (req, res) => {
+    const worker_sid = req.query.worker_sid;
+    const capability = new TaskRouterCapability({
+        accountSid: account_sid,
+        authToken: auth_token,
+        workspaceSid: workspace_sid,
+        channelId: worker_sid,
+    });
+    const eventBridgePolicies = util.defaultEventBridgePolicies(
+        account_sid,
+        worker_sid
+    );
+    // Worker Policies
+    const workerPolicies = util.defaultWorkerPolicies(
+        version,
+        workspace_sid,
+        worker_sid
+    );
+
+    function buildWorkspacePolicy(options) {
+        options = options || {};
+        let resources = options.resources || [];
+        let postFilter = options.postFilter || {};
+        var urlComponents = [
+            TASKROUTER_BASE_URL,
+            version,
+            "Workspaces",
+            workspace_sid,
+        ];
+        const policy = new Policy({
+            url: urlComponents.concat(resources).join("/"),
+            method: options.method || "GET",
+            postFilter: postFilter,
+            allow: true,
+        });
+        return policy;
+    }
+
+    const workspacePolicies = [
+        // Workspace subresources fetch Policy for the specified worker in the workspace
+        // Use wild card '**' to match all subresources of the workers in workspace
+
+        buildWorkspacePolicy({
+            resources: ["Workers", worker_sid],
+            method: "POST",
+            allow: true,
+            postFilter: { ActivitySid: { required: true } },
+        }),
+        buildWorkspacePolicy({
+            resources: ["Tasks", "**"],
+            method: "POST",
+            allow: true,
+        }),
+        buildWorkspacePolicy({
+            resources: ["Reservations", "**"],
+            method: "POST",
+            allow: true,
+        }),
+    ];
+    eventBridgePolicies
+        .concat(workerPolicies)
+        .concat(workspacePolicies)
+        .forEach((policy) => {
+            capability.addPolicy(policy);
+        });
+    console.log(capability);
+    let worker_token = capability.toJwt();
+    res.status(200).render("agents.pug", {
+        worker_token: worker_token,
+    });
+});
 app.listen(port, () => console.log(`Taskrouter app listening on port ${port}!`));

@@ -18,6 +18,27 @@ To simulate reality, we'll create a Task using the REST API rather than the web 
 
 \*note if you did not already install the Twilio NPM, do it now before executing this code.
 
+_FIRST GO THROUGH SET UP BEFORE PRESENTING THIS CODE_
+
+Create the route "/create_task" inside your node/express server. 
+```javascript
+app.get("/create_task", (req, res) => {
+  //Create a task
+  client.taskrouter
+    .workspaces(workspace_sid)
+    .tasks.create({
+      workflowSid: workflow_sid,
+      attributes: JSON.stringify({
+        selected_language: "es",
+      }),
+    })
+    .then((task) => {
+      console.log(task.sid);
+      res.send(`task ${task.sid}`);
+    });
+});
+```
+The entire server could should look as such: 
 ```javascript
 //imports
 require("dotenv").config();
@@ -38,8 +59,8 @@ const account_sid = process.env.TWILIO_ACCOUNT_SID;
 const auth_token = process.env.TWILIO_AUTH_TOKEN;
 const workspace_sid = process.env.TWILIO_WORKSPACE_SID;
 const workflow_sid = process.env.TWILIO_WORKFLOW_SID;
-const worker_neva_sid = process.env.TWILIO_WORKER_NEVA_SID;
-const worker_zoe_sid = process.env.TWILIO_WORKER_ZOE_SID;
+const worker_alice_sid = process.env.TWILIO_WORKER_ALICE_SID;
+const worker_bob_sid = process.env.TWILIO_WORKER_BOB_SID;
 const post_worker_activity_sid = process.env.TWILIO_POST_WORKER_ACTIVITY;
 //routes
 app.post("/assignment_callback", (req, res) => {
@@ -51,7 +72,6 @@ app.post("/assignment_callback", (req, res) => {
     res.status(500).json({ message: "error", error: err });
   }
 });
-
 app.get("/create_task", (req, res) => {
   //Create a task
   client.taskrouter
@@ -67,7 +87,6 @@ app.get("/create_task", (req, res) => {
       res.send(`task ${task.sid}`);
     });
 });
-
 //initalize server
 app.listen(port, () =>
   console.log(`Taskrouter app listening on port ${port}!`)
@@ -78,7 +97,7 @@ Next, reset your Workflow's Assignment Callback URL as shown below to point to y
 
 ![assignment_callback](images/assignment_callback2.png)
 
-To generate a Task, visit the /create_task route we have just defined.
+To generate a Task, visit the */create_task route we have just defined.
 
 Alternatively, we can also create a Task using the command line utility curl, which should exist on any Mac or Linux workstation. Execute the following command at your terminal, making sure to replace the {} with your ngrok forwarding URL:
 
@@ -119,10 +138,9 @@ Time to accept the Reservation.
 
 [Next: Accept a Reservation with the REST API »](part2-c-accept_reservation.md)
 
+
 <details>
 <summary>Click to expand navigation</summary>
-
 - [Part 2](part2.md)
 - [Overview](../overview.md)
-
 </details>

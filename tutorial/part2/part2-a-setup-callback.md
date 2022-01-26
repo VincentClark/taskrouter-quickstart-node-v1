@@ -45,7 +45,7 @@ This will create your package.json file.
 
 > Not sure if I need this section or go into setting start script.
 
-Next we will need to install the express and twilio
+Next we will need to install the express, dotenv, and twilio
 
 ```
 npm install --save express twilio dotenv
@@ -68,7 +68,7 @@ It is best practice to keep your sid information into a .env file seprate from y
 Do not worry about the TWILIO_POSTER_WORKER_ACTIVITY blank for now and we will address it later in the tutorial.
 
 ### server.js
-
+Here we will set the base for our server. 
 ```javascript
 //imports
 require("dotenv").config();
@@ -132,7 +132,7 @@ With those things working, edit your "Incoming Customer Care Requests" Workflow 
 
 Excellent. We're ready to create Tasks and accept Reservations.
 
-[Next: Create a Task using the REST API »](part2-a-create-task-restapi.md)
+[Next: Create a Task using the REST API »](part2-b-create-task-restapi.md)
 
 <details>
 <summary>Click to expand navigation</summary>

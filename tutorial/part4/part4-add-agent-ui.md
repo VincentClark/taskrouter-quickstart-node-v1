@@ -2,7 +2,7 @@
 
 Let's get started on our agent UI. Assuming you've followed the conventions so far in this tutorial, the UI we create will be accessible using your web browser at:
 
-<code style="color:red;background-color:ivory">localhost:8080/agents?WorkerSid=WK01234012340123401234</code> (substitute your Alice's WorkerSid)
+<code style="color:red;background-color:ivory">localhost:3000/agents?WorkerSid=WK***********</code> (substitute your Alice's WorkerSid)
 
 We pass the WorkerSid in the URL to avoid implementing complex user management in our demo. In reality, you are likely to store a user's WorkerSid in your database alongside other User attributes.
 
@@ -510,7 +510,7 @@ You will notice that we included two enternal files:
 
 > -agent.css is a simple CSS file created for the purpose of this Quickstart. It saves us having to type out some simple pre-defined styles.
 
-And that's it! Open <code style="color:red; background-color:ivory">localhost:8080/agents?WorkerSid={WK012340123401234}</code> in your browser and you should see the screen below. If you make the same phone call as we made in Part 3, ~~~you should see Alice's Activity transition on screen as she is reserved and assigned to handle the Task.~~~
+And that's it! Open <code style="color:red; background-color:ivory">localhost:3000/agents?WorkerSid={WK***********}</code> in your browser and you should see the screen below. If you make the same phone call as we made in Part 3, ~~~you should see Alice's Activity transition on screen as she is reserved and assigned to handle the Task.~~~
 
 If you see "Initializing..." and no progress, make sure that you have included the correct WorkerSid in the "WorkerSid" request parameter of the URL.
 
