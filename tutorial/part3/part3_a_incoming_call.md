@@ -108,6 +108,7 @@ app.post("/incoming_call", (req, res) => {
     g.say("For English press 1", { language: "en" });
     g.say("Para español presione 2", { language: "es" });
     //send to Twilio as twiml
+    res.type('text/xml');
     res.status(200).send(twiml.toString());
   } catch (err) {
     console.log(err);

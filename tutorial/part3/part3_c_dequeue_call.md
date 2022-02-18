@@ -2,7 +2,9 @@
 
 In the previous step we created a Task from an incoming phone call using <code style="color:red;background_color:ivory"><\_Enqueue workflowSid="WW0123401234.."\_></code>. In this step we will create another call and dequeue it to an eligible Worker when one becomes available.
 
-Back in [Part 1](../part1/part1.md) of the Quickstart we created a Worker named Alice that is capable of handling both English and Spanish inquiries. With your Workspace open in the [TaskRouter web portal](https://www.twilio.com/console/taskrouter/workspaces), click 'Workers' and click to edit the details of our Worker Alice. Ensure that Alice is set to a non-available Activity state such as 'Offline'. Next, edit Alice's JSON attributes and add a "contact_uri" field. When Alice accepts a Task, she will receive a call on the phone number entered in the "contact_uri" field. Replace the dummy 555 number below with your own phone number.
+Back in [Part 1](../part1/part1.md) of the Quickstart we created a Worker named Alice that is capable of handling both English and Spanish inquiries. With your Workspace open in the [TaskRouter web portal](https://www.twilio.com/console/taskrouter/workspaces), click 'Workers' and click to edit the details of our Worker Alice. Ensure that Alice is set to a non-available Activity state such as 'Offline'. Next, edit Alice's JSON attributes and add a "contact_uri" field. When Alice accepts a Task, she will receive a call on the phone number entered in the "contact_uri" field. Replace the dummy 555 number below with your Twilio phone number.
+
+> Caller => Twilio Number => contact uri
 
 Alice's modified JSON attributes:
 

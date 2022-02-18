@@ -248,6 +248,7 @@ app.post("/incoming_call", (req, res) => {
       { language: "es" }
     );
     //send to Twilio as twiml
+    res.type('text/xml');
     res.status(200).send(twiml.toString());
   } catch (err) {
     console.log(err);
